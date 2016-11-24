@@ -1,9 +1,11 @@
 package downloader.ui;
 
+import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
@@ -14,27 +16,16 @@ public class Main {
 	public static void main(String[] argv){
 		
 		JFrame fenetre = new JFrame("Downloader");
+		JPanel contenu = new JPanel(new StackLayout());
+		fenetre.setLayout(new BorderLayout());
+		fenetre.add(contenu,BorderLayout.CENTER);
 		
-		JProgressBar telechargement = new JProgressBar();
-		telechargement.setBorderPainted(true);
-		telechargement.setStringPainted(true);
+
+		contenu.add(new DownloadBar(argv[0]));
+
 		
-		Downloader d = new Downloader(argv[0]);
-		Thread tdown = new Thread(d);
-		tdown.start();
-		d.addPropertyChangeListener(new PropertyChangeListener() {
-			
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				telechargement.setValue(d.getProgress());
-				telechargement.setString(d.getProgress()+" %");
-				
-			}
-		});
+		fenetre.add(new BarreAjout(contenu),BorderLayout.PAGE_END);
 		
-		
-		
-		fenetre.add(telechargement);
 		fenetre.pack();
 		fenetre.setVisible(true);
 	}
