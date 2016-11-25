@@ -20,7 +20,7 @@ public class BarreAjout extends JPanel {
 		barre=new JToolBar();
 		barre.setFloatable(false);
 		barre.add(url);
-		barre.add(accept,BorderLayout.PAGE_END);
+		barre.add(accept);
 		add(barre);
 	}
 	

@@ -2,6 +2,9 @@ package downloader.fc;
 
 import java.net.URL;
 import java.net.URLConnection;
+
+import javax.swing.SwingWorker;
+
 import java.net.MalformedURLException;
 
 import java.io.File;
@@ -13,7 +16,7 @@ import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 
 
-public class Downloader extends Thread{
+public class Downloader extends SwingWorker<String,Void>{
 	public static final int CHUNK_SIZE = 1024;
 	
 	URL url;
@@ -25,7 +28,7 @@ public class Downloader extends Thread{
 	FileOutputStream out;
 	
 	private int _progress;
-	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+	private PropertyChangeSupport pcs =new PropertyChangeSupport(this);
 	
 	public Downloader(String uri) {
 		try {
@@ -78,7 +81,7 @@ public class Downloader extends Thread{
 		temp.renameTo(new File(filename));
 		return filename;
 	}
-	
+/*
 	public int getProgress() {
 		return _progress;
 	}
@@ -104,6 +107,18 @@ public class Downloader extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+*/	
+	@Override
+	public String doInBackground() throws Exception {
+		try{
+		download();
+		}catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 		
 	}
 }
