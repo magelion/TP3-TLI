@@ -18,7 +18,7 @@ public class EcouteurBoutonAjout implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		pan.add(new DownloadBar(url.getText()));
+		pan.add(new DownloadBar(url.getText(),pan));
 		pan.revalidate();
 		
 	}

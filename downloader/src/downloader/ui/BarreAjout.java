@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 public class BarreAjout extends JPanel {
+
 	JTextField url;
 	JButton accept;
 	JToolBar barre;

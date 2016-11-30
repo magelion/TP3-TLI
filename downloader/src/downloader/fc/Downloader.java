@@ -2,6 +2,8 @@ package downloader.fc;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.SwingWorker;
 
@@ -26,6 +28,7 @@ public class Downloader extends SwingWorker<String,Void>{
 	String filename;
 	File temp;
 	FileOutputStream out;
+	Lock verrou;
 	
 	private int _progress;
 	private PropertyChangeSupport pcs =new PropertyChangeSupport(this);
@@ -36,7 +39,7 @@ public class Downloader extends SwingWorker<String,Void>{
 			
 			URLConnection connection = url.openConnection();
 			content_length = connection.getContentLength();
-			
+			verrou=new ReentrantLock();
 			in = new BufferedInputStream(connection.getInputStream());
 			
 			String[] path = url.getFile().split("/");
@@ -62,7 +65,8 @@ public class Downloader extends SwingWorker<String,Void>{
 				out.write(buffer, 0, count);
 			}
 			catch(IOException e) { continue; }
-			
+			verrou.lock();
+			verrou.unlock();
 			size += count;
 			setProgress(100*size/content_length);
 			Thread.sleep(1000);
@@ -110,6 +114,19 @@ public class Downloader extends SwingWorker<String,Void>{
 		
 	}
 */	
+	public void Pause(){
+		System.out.println("PAUSE");
+		verrou.lock();
+		
+		
+	}
+	
+	public void Play(){
+		System.out.println("PLAY");
+		verrou.unlock();
+	}
+	
+	
 	@Override
 	public String doInBackground() throws Exception {
 		try{

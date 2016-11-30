@@ -23,7 +23,7 @@ public class DownloadBar extends JPanel {
 	JPanel pGauche;
 	JPanel pDroite;
 	
-	public DownloadBar(String url) {
+	public DownloadBar(String url,JPanel p) {
 		super(new BorderLayout());
 		pGauche=new JPanel();
 		pDroite=new JPanel();
@@ -37,18 +37,19 @@ public class DownloadBar extends JPanel {
 		
 		pGauche.add(nom);
 		pGauche.add(telechargement);
-		
-		play_pause=new JButton("II / |> ");
-		play_pause.addActionListener(new EcouteurBoutonPP(download));
+		download = new Downloader(url);
+		download.execute();
+		play_pause=new JButton("Play");
+		play_pause.addActionListener(new EcouteurBoutonPP(download,play_pause));
 		pDroite.add(play_pause);
 		stop=new JButton("Stop");
-		stop.addActionListener(new EcouteurBoutonStop(download));
+		stop.addActionListener(new EcouteurBoutonStop(download,p,this));
 		pDroite.add(stop);
 		
 		//add(telechargement,BorderLayout.CENTER);
 		add(pGauche,BorderLayout.CENTER);
 		add(pDroite,BorderLayout.EAST);
-		download = new Downloader(url);
+		
 
 		
 		//fil = new Thread(download);
@@ -60,9 +61,12 @@ public class DownloadBar extends JPanel {
 				telechargement.setString(download.getProgress() + " %");
 			}
 		});	
-		download.execute();
-
+		 
+		
 		//fil.start();
 	}
-
+	
+	public void delete(){
+	//todo
+	}
 }
