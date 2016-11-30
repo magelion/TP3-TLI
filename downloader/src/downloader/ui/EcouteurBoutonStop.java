@@ -15,17 +15,15 @@ public class EcouteurBoutonStop implements ActionListener{
 	DownloadBar barre;
 	
 	public EcouteurBoutonStop(Downloader d,JPanel p,DownloadBar b) {
-		// TODO Auto-generated constructor stub
 		download = d;
 		conteneur=p;
 		barre=b;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		download.cancel(true);
+		download.cancel(false);
 		conteneur.remove(barre);
-		conteneur.revalidate();
+		conteneur.updateUI();
 	}
 
 }	

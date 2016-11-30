@@ -85,44 +85,14 @@ public class Downloader extends SwingWorker<String,Void>{
 		temp.renameTo(new File(filename));
 		return filename;
 	}
-/*
-	public int getProgress() {
-		return _progress;
-	}
-	
-	public void setProgress(int progress) {
-		int old_progress = _progress;
-		_progress = progress;
-		pcs.firePropertyChange("progress", old_progress, progress);
-	}
-	
-	public void addPropertyChangeListener(PropertyChangeListener listener) {
-		pcs.addPropertyChangeListener(listener);
-	}
-	
-	public void removePropertyChangeListener(PropertyChangeListener listener) {
-		pcs.removePropertyChangeListener(listener);
-	}
 
-	public void run() {
-		try {
-			this.download();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-*/	
-	public void Pause(){
-		System.out.println("PAUSE");
+	public void pause(){
 		verrou.lock();
 		
 		
 	}
 	
-	public void Play(){
-		System.out.println("PLAY");
+	public void play(){
 		verrou.unlock();
 	}
 	
@@ -130,9 +100,8 @@ public class Downloader extends SwingWorker<String,Void>{
 	@Override
 	public String doInBackground() throws Exception {
 		try{
-		download();
+			download();
 		}catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

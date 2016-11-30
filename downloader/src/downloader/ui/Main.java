@@ -20,7 +20,7 @@ public class Main {
 		fenetre.add(new BarreAjout(contenu),BorderLayout.PAGE_END);
 		
 		fenetre.pack();
-		//fenetre.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setVisible(true);
 	}
 }	

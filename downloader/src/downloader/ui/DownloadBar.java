@@ -19,7 +19,6 @@ public class DownloadBar extends JPanel {
 	JButton play_pause;
 	JButton stop;
 	JLabel nom;
-	//Thread fil;
 	JPanel pGauche;
 	JPanel pDroite;
 	
@@ -46,13 +45,9 @@ public class DownloadBar extends JPanel {
 		stop.addActionListener(new EcouteurBoutonStop(download,p,this));
 		pDroite.add(stop);
 		
-		//add(telechargement,BorderLayout.CENTER);
 		add(pGauche,BorderLayout.CENTER);
 		add(pDroite,BorderLayout.EAST);
 		
-
-		
-		//fil = new Thread(download);
 		download.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
@@ -62,11 +57,5 @@ public class DownloadBar extends JPanel {
 			}
 		});	
 		 
-		
-		//fil.start();
-	}
-	
-	public void delete(){
-	//todo
 	}
 }
